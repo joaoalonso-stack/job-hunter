@@ -170,7 +170,7 @@ def gerar_relatorios(conn, prefs, hoje):
 
 
 def avisar_top(conn, prefs, hoje, n=5):
-    """Top 5 do dia no celular (mais qualquer uma >= limiar urgente). Se a triagem falhou, usa a nota prévia."""
+    """Top 5 do dia no celular (mais qualquer uma >= limiar urgente), só acima da nota mínima. Sem triagem, não avisa."""
     import notify
     from saidas import dados
     do_dia = [l for l in dados.linhas(conn, prefs, hoje) if l["hoje"] and l["aba"] == "ativa"]
@@ -179,8 +179,8 @@ def avisar_top(conn, prefs, hoje, n=5):
         minimo = prefs["limiares"].get("minimo_alerta", 40)  # dia fraco: manda menos de 5 em vez de lixo
         ordem = sorted((l for l in triadas if l["nota"] >= minimo), key=lambda l: -l["nota"])
         escolhidas = ordem[:n] + [l for l in ordem[n:] if l["nota"] >= prefs["limiares"]["urgente"]]
-    else:
-        escolhidas = sorted(do_dia, key=lambda l: -(l["score_pre"] or 0))[:n]
+    else:  # triagem falhou: a nota prévia deixa passar vendas e call center; as vagas são triadas e avisadas amanhã
+        return "0 alertas: triagem indisponível hoje"
     ja = db.ja_vistas(conn, ["top:" + l["id"] for l in escolhidas])
     novas = [l for l in escolhidas if "top:" + l["id"] not in ja]
     for l in novas:

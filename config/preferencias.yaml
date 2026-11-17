@@ -111,5 +111,6 @@ limiares:
 execucao:
   horario: "08:00"           # o notebook não acorda sozinho (Modern Standby): roda ao abrir depois disso
   fuso: America/Sao_Paulo
+  modelo_triagem: sonnet      # incluído na assinatura e leve no limite de uso; "opus" dá notas mais finas
   janela_publicacao_dias: 7   # LinkedIn/Glassdoor/abas: vagas vistas na última semana
   janela_gupy_dias: 60        # a Gupy só lista vagas abertas: pega as publicadas há até 60 dias

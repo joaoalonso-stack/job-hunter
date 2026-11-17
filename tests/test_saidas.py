@@ -134,3 +134,12 @@ def test_aviso_top_ignora_nota_baixa(base, monkeypatch):
     monkeypatch.setattr(run.time, "sleep", lambda s: None)
     run.avisar_top(conn, PREFS, HOJE)
     assert [m["click"] for m in enviados] == ["https://a"], "nota 1 fica só na página, não vai ao celular"
+
+
+def test_sem_triagem_nao_avisa(base, monkeypatch):
+    conn, tmp = base
+    conn.execute("DELETE FROM triagens")  # a triagem do dia falhou
+    monkeypatch.setattr(dados, "ids_de_hoje", lambda hoje, data_dir=None: ["a", "d"])
+    enviados = []
+    monkeypatch.setattr(notify, "enviar", lambda msg: enviados.append(msg))
+    assert run.avisar_top(conn, PREFS, HOJE).startswith("0 alertas") and not enviados

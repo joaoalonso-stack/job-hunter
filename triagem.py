@@ -74,8 +74,10 @@ def rodar(caminho_jsonl, conn=None, executar=subprocess.run):
     caminho_jsonl = Path(caminho_jsonl)
     rel = caminho_jsonl.resolve().relative_to(BASE).as_posix()
     env = {k: v for k, v in os.environ.items() if k != "ANTHROPIC_API_KEY"}  # garante a assinatura, nunca a API paga
+    # Modelo fixo e incluído na assinatura: o padrão do CLI pode mudar para um que exige créditos (17/11).
+    modelo = preferencias.carregar().get("execucao", {}).get("modelo_triagem", "sonnet")
     proc = executar([claude_exe(), "-p", f"/triagem {rel} --so-json", "--output-format", "json",
-                     "--allowedTools", "Read"], cwd=BASE, capture_output=True, text=True, encoding="utf-8",
+                     "--model", modelo, "--allowedTools", "Read"], cwd=BASE, capture_output=True, text=True, encoding="utf-8",
                     timeout=TIMEOUT_S, env=env, stdin=subprocess.DEVNULL,  # sem console na tarefa agendada
                     creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
     try:
