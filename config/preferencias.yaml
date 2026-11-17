@@ -1,0 +1,115 @@
+# Preferências do job hunter. Editável à mão; lido pelo filtro duro, pelo ranking e pela /triagem.
+
+locais:                       # para vagas presenciais ou híbridas
+  - nome: Rio de Janeiro
+    preferido: true           # ganha bônus no ranking
+  - nome: São Paulo
+    preferido: false
+
+modalidade:
+  aceitas: [presencial, hibrido, remoto]
+  remoto_qualquer_lugar_do_brasil: true   # presencial/híbrido fora dos locais acima é descartado
+
+incluir:                      # sinais de nível de entrada
+  - júnior
+  - junior
+  - analista
+  - associate                 # no mercado financeiro pode ser cargo acima de analista: a /triagem verifica
+  - entry level
+  - trainee
+  - programa de formação
+
+excluir:
+  - sênior
+  - pleno
+  - especialista
+  - coordenador
+  - gerente
+  - head
+  - diretor
+  - estágio
+  - vendas externas
+  - telemarketing
+  - call center
+  - representante comercial
+  # vendas com nome de analista/consultor (apareciam no topo do ranking)
+  - assessor
+  - assesor
+  - comercial
+  - sales
+  - consultor comercial       # "consultor" sozinho barraria "consultoria econômica"
+  - consultor de vendas
+  - consultor de investimentos
+  - consultor de planejamento financeiro
+  - contas a pagar
+  - contas a receber
+  - cobrança
+  # nível II/III/IV costuma pedir experiência de pleno (vale como palavra isolada: "Controladoria III")
+  - ii
+  - iii
+  - iv
+
+termos:
+  - economista
+  - analista econômico
+  - analista macroeconômico
+  - research econômico
+  - estudos econômicos
+  - inteligência de mercado
+  - analista de investimentos
+  - analista de fundos
+  - gestão de recursos
+  - asset management
+  - analista de crédito
+  - analista de risco
+  - risco de mercado
+  - trader júnior
+  - mesa de commodities
+  - consultoria econômica
+  - FP&A
+  - backoffice
+  - middle office
+  - analista de operações financeiras
+  - controle de fundos
+  - precificação de ativos
+  - liquidação e custódia
+  - trainee economia
+  - trainee mercado financeiro
+  - trainee 2027
+
+trilhas:                      # peso na nota final
+  macro_research: 1.0
+  asset_fundos: 0.9
+  trading_commodities: 0.85
+  backoffice_middle: 0.8
+  credito_risco: 0.8
+  consultoria: 0.75
+  trainee_generalista: 0.75
+  inteligencia_mercado_fpa: 0.65
+  outro: 0.2
+
+watchlist:                    # pré-preenchida com empresas encontradas na Gupy; edite à vontade
+  gupy:
+    - vemproitau
+    - bancodaycoval
+    - genial
+    - opportunity
+    - abcbrasil
+    - bancofibra
+    - bancosofisa
+    - lcaconsultores
+    - vempraot
+  greenhouse: []
+  lever: []
+
+limiares:
+  destaque: 65
+  urgente: 85                 # entra no alerta do dia mesmo fora do top 5
+  minimo_alerta: 40           # abaixo disso não vai ao celular, nem no top 5 (continua na página)
+  prazo_dias: 3               # prazo em vermelho quando faltar até isso
+
+execucao:
+  horario: "08:00"           # o notebook não acorda sozinho (Modern Standby): roda ao abrir depois disso
+  fuso: America/Sao_Paulo
+  janela_publicacao_dias: 7   # LinkedIn/Glassdoor/abas: vagas vistas na última semana
+  janela_gupy_dias: 60        # a Gupy só lista vagas abertas: pega as publicadas há até 60 dias

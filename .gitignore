@@ -1,0 +1,15 @@
+# ambiente
+.venv/
+__pycache__/
+.pytest_cache/
+
+# dados pessoais e estado (ficam só nesta máquina)
+data/
+logs/
+relatorios/
+*.migrado
+vagas_encontradas.md
+credentials.json
+token.json
+
+config/ntfy_topic.txt

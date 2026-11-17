@@ -1,0 +1,2 @@
+# Copie para config/ntfy_topic.txt e troque pelo nome do seu tópico no app ntfy (um nome longo e aleatório).
+meu-topico-aleatorio-1234
